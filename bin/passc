@@ -1,0 +1,5 @@
+#!/bin/bash
+
+PORT=8739
+
+echo "$*" | nc localhost $PORT

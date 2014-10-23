@@ -1,0 +1,22 @@
+_get_completes() {
+	folder=""
+	passc |tail -n +2 |while read line;  do
+		stripped=${line:4}
+		first=${stripped:0:1}
+		if [[ $first =~ [a-zA-Z0-9] ]]; then
+			folder=$stripped
+			echo $folder
+		else
+			second_part=${stripped:4}
+			echo "$folder/$second_part"
+		fi
+	done
+}
+
+
+_passc()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "$(_get_completes | sort | uniq | xargs)" -- $cur) )
+}
+complete -F _passc passc

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Local part of a 'pass' remote system
+# Add 'RemoteForward 8739:localhost:8739' to ~/.ssh/config for the servers you
+# want to forward 'pass' to
+
+PORT=8739
+
+die() {
+	echo $*
+	exit 1
+}
+
+which socat > /dev/null || die "Need socat"
+
+function handle_request() {
+	# Parse the message
+	read -r arg
+	#echo "Arg: $arg (should only see this in client)"
+	pass $arg
+}
+
+function receive() {
+	echo "Listening on $PORT"
+	socat -v tcp-l:$PORT,fork exec:$0 2>/dev/null
+}
+
+# If parent process is socat, we are in 'handle message' mode
+# Otherwise, listen on $PORT
+parent=$(ps -ocommand= -p $PPID | cut -d ' ' -f 1)
+if [ "$parent" == "socat" ]; then
+	handle_request
+else
+	receive
+fi
