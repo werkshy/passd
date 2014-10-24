@@ -16,6 +16,7 @@ which socat > /dev/null || die "Need socat"
 function handle_request() {
 	# Parse the message
 	read -r arg
+	pkill -SIGHUP gpg-agent
 	#echo "Arg: $arg (should only see this in client)"
 	pass $arg
 }

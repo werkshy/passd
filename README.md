@@ -24,14 +24,17 @@ _passc_ accepts any argument that _pass_ does. It also has bash completion.
 
 _passd_ works by running a thin server on your workstation (listening on
 localhost) and forwarding requests over an SSH-remote-forwarded port. This means
-any user on the remote system can access your passd server. __DO NOT FORWARD
-PORTS TO MULTI-USER OR UNTRUSTED SERVERS.__
+any user on the local system or the remote system can access your passd server.
+__DO NOT FORWARD PORTS TO MULTI-USER OR UNTRUSTED SERVERS.__
 
 Other than that, access to your local password store will go through your local
-gpg-agent setup. On OS X, you probably need to use GPGTools to get non-terminal
-password entry working. You have one practical options for configuring a timeout
-for the key password: in GPGPreferences do not enable 'remember in keychain',
-and set a timeout.
+gpg-agent setup, and you'll need a graphical pinentry program set up.  
+On OS X, I think this means using GPGTools not the homebrew version of
+gpg-agent.
+
+In order to prevent a local or remote attacker from plundering your passwords,
+we force gpg-agent to drop all stored passphrases before running `pass`. If you
+use other keys with gpg-agent this will get annoying. Pull requests welcome.
 
 ## Installation
 
