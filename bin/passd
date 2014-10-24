@@ -21,8 +21,8 @@ function handle_request() {
 }
 
 function receive() {
-	echo "Listening on $PORT"
-	socat -v tcp-l:$PORT,fork exec:$0 2>/dev/null
+	echo "Listening on localhost:$PORT"
+	socat -v tcp-l:$PORT,bind=localhost,fork exec:$0 2>/dev/null
 }
 
 # If parent process is socat, we are in 'handle message' mode
