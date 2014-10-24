@@ -28,7 +28,10 @@ any user on the remote system can access your passd server. __DO NOT FORWARD
 PORTS TO MULTI-USER OR UNTRUSTED SERVERS.__
 
 Other than that, access to your local password store will go through your local
-gpg-agent setup. You can configure a password timeout for your gpg key.
+gpg-agent setup. On OS X, you probably need to use GPGTools to get non-terminal
+password entry working. You have one practical options for configuring a timeout
+for the key password: in GPGPreferences do not enable 'remember in keychain',
+and set a timeout.
 
 ## Installation
 
