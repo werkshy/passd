@@ -20,7 +20,23 @@ On the remote server, run
 
 _passc_ accepts any argument that _pass_ does. It also has bash completion.
 
+## Security Concerns
+
+_passd_ works by running a thin server on your workstation (listening on
+localhost) and forwarding requests over an SSH-remote-forwarded port. This means
+any user on the remote system can access your passd server. __DO NOT FORWARD
+PORTS TO MULTI-USER OR UNTRUSTED SERVERS.__
+
+Other than that, access to your local password store will go through your local
+gpg-agent setup. You can configure a password timeout for your gpg key.
+
 ## Installation
+
+### Requirements
+
+`passd` requires `socat` and `pass` (available in apt-get and brew)
+
+`passc` requires `nc` aka netcat (available in apt-get and brew)
 
 ### Manual Installation
 
