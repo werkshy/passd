@@ -28,9 +28,9 @@ any user on the local system or the remote system can access your passd server.
 __DO NOT FORWARD PORTS TO MULTI-USER OR UNTRUSTED SERVERS.__
 
 Other than that, access to your local password store will go through your local
-gpg-agent setup, and you'll need a graphical pinentry program set up.  
-On OS X, I think this means using GPGTools not the homebrew version of
-gpg-agent.
+gpg-agent setup, and you'll need a graphical pinentry program set up.
+On OS X / brew, this means installing 'pinentry-mac' and setting it in
+~/.gnupg/gpg-agent.conf.
 
 In order to prevent a local or remote attacker from plundering your passwords,
 we force gpg-agent to drop all stored passphrases before running `pass`. If you
